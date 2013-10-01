@@ -32,9 +32,10 @@ logger::~logger()
 bool logger::parse_configuration(void)
 {
     // FIXME: read configuration from a file
-    add_tag("virtio", logger_warn);
+    add_tag("virtio", logger_debug);
     add_tag("virtio-blk", logger_warn);
     add_tag("virtio-net", logger_warn);
+    add_tag("virtio-rng", logger_debug);
     add_tag("pci", logger_info);
     add_tag("poll", logger_info);
     add_tag("dhcp", logger_info);

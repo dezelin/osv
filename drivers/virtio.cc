@@ -97,12 +97,14 @@ void virtio_driver::dump_config()
 bool virtio_driver::parse_pci_config(void)
 {
     if (!_dev.parse_pci_config()) {
+        virtio_e("Invalid PCI config.");
         return (false);
     }
 
     // Test whether bar1 is present
     _bar1 = _dev.get_bar(1);
     if (_bar1 == nullptr) {
+        virtio_e("No PCI bar defined.");
         return (false);
     }
 
@@ -170,7 +172,7 @@ bool virtio_driver::probe_virt_queues(void)
         virtio_conf_writew(VIRTIO_MSI_QUEUE_VECTOR, _num_queues);
         if (virtio_conf_readw(VIRTIO_MSI_QUEUE_VECTOR) != _num_queues) {
             virtio_e("Setting MSIx entry for queue %d failed.", _num_queues);
-            return false;
+            //return false;
         }
 
         _num_queues++;
